@@ -1,8 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect } from "react";
 import useSelectedCryptoData from "../../hooks/useSelectedCryptoData";
 import SelectedCryptoContainer from "./SelectedCryptoContainer";
 import SelectedCryptoItem from "./SelectedCryptoItem";
-import { CryptoData } from "../../utils/api";
 
 interface SelectedCryptoListProps {
   selectedCurrenciesIds: string[];
@@ -28,7 +27,7 @@ const SelectedCryptoList: React.FC<SelectedCryptoListProps> = ({
   }, [fetchSelectedData, selectedCurrenciesIds]);
 
   //TODO: check this
-  console.log(selectedCryptocurrencies, "multiple logs");
+  // console.log(selectedCryptocurrencies, "multiple logs");
   return (
       <SelectedCryptoContainer>
       {selectedCryptocurrencies &&

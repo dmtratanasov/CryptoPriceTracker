@@ -15,7 +15,7 @@ interface CryptoListProps {
 const CryptoList: React.FC<CryptoListProps> = ({
   cryptocurrencies,
   manageSelectedCurrenciesDispatch,
-  selectedCurrencies
+  selectedCurrencies,
 }) => {
   const [renderCryptoCurrencies, setRenderCryptoCurrencies] = useState<
     CryptoData[]
@@ -26,17 +26,22 @@ const CryptoList: React.FC<CryptoListProps> = ({
     if (localStorageItem) {
       const tempIds: string[] =
         JSON.parse(localStorageItem).selectedCurrenciesIds;
-      let tempCurrencies = cryptocurrencies.map((crypto: CryptoData) => ({
-        ...crypto,
-        selected: tempIds.includes(crypto.id),
-      }));
+      let tempCurrencies = cryptocurrencies.map((crypto: CryptoData) => {
+        return {
+          ...crypto,
+          selected: tempIds.includes(crypto.id),
+        };
+      });
+      // ({
+      //   ...crypto,
+      //   selected: tempIds.includes(crypto.id),
+      // }));
       tempCurrencies.sort((a, b) => {
         // Move selected cryptos to the top
         if (a.selected && !b.selected) return -1;
         if (!a.selected && b.selected) return 1;
         return 0;
       });
-
       setRenderCryptoCurrencies([...tempCurrencies]);
     }
   }, [cryptocurrencies, selectedCurrencies]);
@@ -56,23 +61,23 @@ const CryptoList: React.FC<CryptoListProps> = ({
             <FormControlLabel
               control={
                 <label className="star-checkbox-root">
-                <Checkbox
+                  <Checkbox
                     className="star-checkbox-input"
                     icon={<StarBorderIcon />}
                     checkedIcon={<StarIcon className="star-checkbox-icon" />}
-                      checked={crypto.selected}
-                      onChange={(e) => {
-                        const isChecked = e.target.checked;
-                        crypto.selected = isChecked;
-                        const actionType = isChecked
-                          ? ACTIONS.SET_SELECTED_CURRENCIES
-                          : ACTIONS.REMOVE_SELECTED_CURRENCIES;
-                        manageSelectedCurrenciesDispatch({
-                          type: actionType,
-                          payload: crypto.id,
-                        });
-                      }}
-                    />
+                    checked={crypto.selected}
+                    onChange={(e) => {
+                      const isChecked = e.target.checked;
+                      crypto.selected = isChecked;
+                      const actionType = isChecked
+                        ? ACTIONS.SET_SELECTED_CURRENCIES
+                        : ACTIONS.REMOVE_SELECTED_CURRENCIES;
+                      manageSelectedCurrenciesDispatch({
+                        type: actionType,
+                        payload: crypto.id,
+                      });
+                    }}
+                  />
                 </label>
               }
               label={crypto.name} // Provide the label text here

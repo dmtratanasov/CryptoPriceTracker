@@ -39,7 +39,7 @@ export interface CryptoData {
 
   export async function fetchSelectedCryptocurrencies(ids: string[] | undefined): Promise<CryptoData[]> {
     if(ids && ids.length > 0){
-      console.log(ids,"IDS!!!!!!!!");
+      // console.log(ids,"IDS!!!!!!!!");
       try {
         const response = await axios.get(`${COINCAP_API_BASE_URL}/assets`, {
           params: {
@@ -62,7 +62,7 @@ export interface CryptoData {
         throw error;
       }
     }else{
-      console.log("NO IDS!!!!!!!!");
+      // console.log("NO IDS!!!!!!!!");
       return [];
     }
   }

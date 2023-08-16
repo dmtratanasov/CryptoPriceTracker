@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer, useLayoutEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import Navbar from "./components/Navbar/NavBar";
 import CryptoList from "./components/CryptoList/CryptoList";
 import useCryptoData from "./hooks/useCryptoData"; // Custom hook
