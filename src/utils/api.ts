@@ -38,8 +38,8 @@ export interface CryptoData {
   }
 
   export async function fetchSelectedCryptocurrencies(ids: string[] | undefined): Promise<CryptoData[]> {
-    console.log(ids,"IDS!!!!!!!!");
     if(ids && ids.length > 0){
+      console.log(ids,"IDS!!!!!!!!");
       try {
         const response = await axios.get(`${COINCAP_API_BASE_URL}/assets`, {
           params: {

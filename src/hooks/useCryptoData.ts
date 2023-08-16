@@ -6,6 +6,7 @@ import { fetchCryptocurrencies, CryptoData } from '../utils/api';
 const useCryptoData = (searchQuery: string | undefined) => {
   const [cryptocurrencies, setCryptocurrencies] = useState<CryptoData[]>([]);
 
+
   const fetchData = useCallback(async () => {
     try {
       const data = await fetchCryptocurrencies(searchQuery);

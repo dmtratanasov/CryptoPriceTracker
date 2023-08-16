@@ -28,13 +28,13 @@
 }
 
 .crypto-list::-webkit-scrollbar-thumb:hover {
-  background-color: grey; 
+  background-color: rgb(37, 16, 16); 
 }
 
 .crypto-header {
   display: flex;
   align-items: center;
-  padding: 16px;
+  padding: 10px 16px;
   background-color: rgba(242, 225, 13, 0.95);
   position: sticky;
   top: 0;
@@ -50,11 +50,12 @@
 
 .crypto-header-price {
   flex-grow: 1; 
-  text-align: end;
+  text-align: center;
 }
 
 .crypto-header-change {
   padding: 0 10px;
+  text-align: center;
 }
 
 /* List items */
@@ -66,6 +67,7 @@
   background-color: rgba(245, 245, 245, 0.7);
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
+  justify-content: space-between;
 }
 
 .crypto-name {

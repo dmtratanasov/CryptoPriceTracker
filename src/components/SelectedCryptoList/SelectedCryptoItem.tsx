@@ -7,7 +7,7 @@ interface SelectedCryptoItemProps{
 
 const SelectedCryptoItem: React.FC<SelectedCryptoItemProps> = ({crypto}) => {
   return (
-    <div style={{ width:'20%' }}>
+    <div key={crypto.id} style={{ width:'20%' }}>
       <p>{crypto.name}</p>
       <p>{crypto.priceUsd}</p>
     </div>

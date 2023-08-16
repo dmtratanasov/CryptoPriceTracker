@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useReducer } from "react";
+import React, { useState, useEffect, useReducer, useLayoutEffect } from "react";
 import Navbar from "./components/Navbar/NavBar";
 import CryptoList from "./components/CryptoList/CryptoList";
 import useCryptoData from "./hooks/useCryptoData"; // Custom hook
 import "./App.css"; // If you have additional global styles
 import SelectedCryptoList from "./components/SelectedCryptoList/SelectedCryptoList";
-import CryptoBackground from "./assets/images/crypto_background.jpg"
-
+import CryptoBackground from "./assets/images/crypto_background.jpg";
+import { CryptoData } from "./utils/api";
 
 export const ACTIONS = {
   SET_SELECTED_CURRENCIES: "SET_SELECTED_CURRENCIES",
@@ -16,13 +16,39 @@ function App() {
   const selectedCurrenciesReducer = (state: any, action: any) => {
     const { type, payload } = action;
 
+    const addToLocalStorage = (selectedCurrencies: CryptoData[]) => {
+      const stringifiedSelectedCurrencies = JSON.stringify(selectedCurrencies);
+      localStorage.setItem(
+        "selectedCurrencies",
+        stringifiedSelectedCurrencies
+      );
+    };
+
     switch (type) {
       case ACTIONS.SET_SELECTED_CURRENCIES:
+        addToLocalStorage({
+          ...state,
+          selectedCurrenciesIds: [...state.selectedCurrenciesIds, payload],
+        });
+        setLocalStorageCurrencies({
+          ...state,
+          selectedCurrenciesIds: [...state.selectedCurrenciesIds, payload],
+        })
         return {
           ...state,
           selectedCurrenciesIds: [...state.selectedCurrenciesIds, payload],
         };
       case ACTIONS.REMOVE_SELECTED_CURRENCIES:
+        addToLocalStorage({
+          ...state,
+          selectedCurrenciesIds: state.selectedCurrenciesIds.filter(
+            (symbol: string) => symbol !== payload
+          ),
+        });
+        setLocalStorageCurrencies({
+          ...state,
+          selectedCurrenciesIds: [...state.selectedCurrenciesIds, payload],
+        })
         return {
           ...state,
           selectedCurrenciesIds: state.selectedCurrenciesIds.filter(
@@ -33,6 +59,8 @@ function App() {
         return state;
     }
   };
+
+  const [localStorageCurrencies, setLocalStorageCurrencies] = useState<string[]>([]);
   const [selectedCurrenciesData, dispatch] = useReducer(
     selectedCurrenciesReducer,
     { selectedCurrenciesIds: [] }
@@ -43,8 +71,18 @@ function App() {
   );
 
   useEffect(() => {
-    console.log(selectedCurrenciesData, "AUUFFF");
-  }, [selectedCurrenciesData]);
+    const localStorageItem = localStorage.getItem('selectedCurrencies');
+    if (localStorageItem) {
+      const tempIds: string[] = JSON.parse(localStorageItem).selectedCurrenciesIds;
+      setLocalStorageCurrencies(tempIds);
+      console.log(tempIds, "TEMPPPP");
+      tempIds.forEach((id: string) => {
+        dispatch({ type: ACTIONS.SET_SELECTED_CURRENCIES, payload: id });
+      });
+    }
+  }, []);
+  
+ 
 
   useEffect(() => {
     const intervalId = setInterval(fetchData, 30000);
@@ -64,6 +102,7 @@ function App() {
         <Navbar onSearch={handleSearch} />
         <SelectedCryptoList
           selectedCurrenciesIds={selectedCurrenciesData.selectedCurrenciesIds}
+          localStorageCurrenciesIds={localStorageCurrencies}
         />
         <CryptoList
           cryptocurrencies={cryptocurrencies}
@@ -75,3 +114,5 @@ function App() {
 }
 
 export default App;
+
+
