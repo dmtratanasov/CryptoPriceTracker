@@ -6,7 +6,7 @@
 .crypto-list {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 13px;
   padding: 0 16px; 
   max-height: 80vh;
   overflow-y: auto; 
