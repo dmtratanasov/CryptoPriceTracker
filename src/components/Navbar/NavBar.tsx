@@ -1,13 +1,8 @@
 import React from "react";
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  InputBase,
-  IconButton,
-} from "@mui/material";
+import { Typography, InputBase } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import "./NavbarStyles.css";
+import { Link } from "react-router-dom";
 
 interface NavbarProps {
   onSearch: (query: string) => void;
@@ -21,7 +16,9 @@ const Navbar: React.FC<NavbarProps> = ({ onSearch }) => {
   return (
     <>
       <Typography variant="h4" component="div" className="title">
-        Crypto Lookup
+        <Link to="/" style={{ textDecoration: "none", color: "white" }}>
+          Crypto Lookup
+        </Link>
       </Typography>
       <div className="search">
         <div className="search-icon">

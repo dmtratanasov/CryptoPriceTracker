@@ -22,27 +22,29 @@ const CryptoList: React.FC<CryptoListProps> = ({
   >([]);
 
   useEffect(() => {
+    // Load selected cryptocurrencies from localStorage and update the list
     const localStorageItem = localStorage.getItem("selectedCurrencies");
+    let updatedCurrencies: CryptoData[] = cryptocurrencies;
+
     if (localStorageItem) {
-      const tempIds: string[] =
-        JSON.parse(localStorageItem).selectedCurrenciesIds;
-      let tempCurrencies = cryptocurrencies.map((crypto: CryptoData) => {
-        return {
-          ...crypto,
-          selected: tempIds.includes(crypto.id),
-        };
-      });
-      // ({
-      //   ...crypto,
-      //   selected: tempIds.includes(crypto.id),
-      // }));
-      tempCurrencies.sort((a, b) => {
-        // Move selected cryptos to the top
+      const selectedIds: string[] = JSON.parse(localStorageItem)
+        .selectedCurrenciesIds;
+
+      updatedCurrencies = cryptocurrencies.map((crypto: CryptoData) => ({
+        ...crypto,
+        selected: selectedIds.includes(crypto.id),
+      }));
+
+      // Sort cryptocurrencies to move selected ones to the top
+      updatedCurrencies.sort((a, b) => {
         if (a.selected && !b.selected) return -1;
         if (!a.selected && b.selected) return 1;
         return 0;
       });
-      setRenderCryptoCurrencies([...tempCurrencies]);
+
+      setRenderCryptoCurrencies(updatedCurrencies);
+    } else {
+      setRenderCryptoCurrencies(updatedCurrencies);
     }
   }, [cryptocurrencies, selectedCurrencies]);
 
@@ -55,7 +57,7 @@ const CryptoList: React.FC<CryptoListProps> = ({
           <Typography className="crypto-header-change">24h %</Typography>
         </div>
       </div>
-      {renderCryptoCurrencies ? (
+      {renderCryptoCurrencies.length ? (
         renderCryptoCurrencies.map((crypto: CryptoData) => (
           <div key={crypto.id} className="crypto-item">
             <FormControlLabel
@@ -80,7 +82,7 @@ const CryptoList: React.FC<CryptoListProps> = ({
                   />
                 </label>
               }
-              label={crypto.name} // Provide the label text here
+              label={crypto.name}
             />
             <div>
               <Typography className="crypto-price">

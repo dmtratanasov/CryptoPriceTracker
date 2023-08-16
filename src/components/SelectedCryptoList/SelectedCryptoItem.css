@@ -1,15 +1,41 @@
 .selected-crypto-item {
-    background-color: rgba(245, 245, 245, 0.7);
-    margin: 10px;
-    border-radius: 8px;
+  background-color: rgba(245, 245, 245, 0.7);
+  margin: 10px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.see-all-wrapper {
+  display: flex;
+  justify-content: end;
+  padding: 0 10px 3px 0;
+}
+
+.see-all-wrapper-link {
+  color: white;
+  margin: 0px;
+  text-decoration: underline;
 }
 
 .selected-crypto-item-change {
-    color: green;
-    padding: 0 8px; 
+  color: green;
+  padding: 0 8px;
+}
+.selected-crypto-item-change.negative {
+  color: red;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .selected-crypto-item {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
   }
-  .selected-crypto-item-change.negative {
-    color: red;
+
+  .selected-crypto-item-change {
+    padding: 5px 8px;
   }
-.selected-crypto-item-name{}
-.selected-crypto-item-price{}
+}

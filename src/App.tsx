@@ -6,6 +6,7 @@ import "./App.css"; // If you have additional global styles
 import SelectedCryptoList from "./components/SelectedCryptoList/SelectedCryptoList";
 import CryptoBackground from "./assets/images/crypto_background.jpg";
 import { CryptoData } from "./utils/api";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 
 export const ACTIONS = {
   SET_SELECTED_CURRENCIES: "SET_SELECTED_CURRENCIES",
@@ -93,22 +94,43 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <div
-        className="crypto-list-wrapper"
-        style={{ backgroundImage: `url(${CryptoBackground})` }}
-      >
-        <Navbar onSearch={handleSearch} />
-        <SelectedCryptoList
-          selectedCurrenciesIds={selectedCurrenciesData.selectedCurrenciesIds}
-          localStorageCurrenciesIds={localStorageCurrencies}
-        />
-        <CryptoList
-          cryptocurrencies={cryptocurrencies}
-          manageSelectedCurrenciesDispatch={dispatch}
-          selectedCurrencies={selectedCurrenciesData.selectedCurrenciesIds}
-        />
-      </div>
+<div className="App">
+<Router>
+  <div
+    className="crypto-list-wrapper"
+    style={{ backgroundImage: `url(${CryptoBackground})` }}
+  >
+    <Navbar onSearch={handleSearch} />
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <>
+            <SelectedCryptoList
+              selectedCurrenciesIds={selectedCurrenciesData.selectedCurrenciesIds}
+            />
+            <CryptoList
+              cryptocurrencies={cryptocurrencies}
+              manageSelectedCurrenciesDispatch={dispatch}
+              selectedCurrencies={selectedCurrenciesData.selectedCurrenciesIds}
+            />
+          </>
+        }
+      />
+      <Route
+        path="/favorites"
+        element={
+          <>
+            <div>FAVOURITES</div>
+          </>
+        }
+      />
+      
+      <Route path="*" element={<Navigate to="/" />} /> {/* Fallback route */}
+    </Routes>
+  </div>
+</Router>
+
     </div>
   );
 }
