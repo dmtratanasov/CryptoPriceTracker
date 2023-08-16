@@ -8,7 +8,7 @@ const SelectedCryptoContainer: React.FC<SelectedCryptoContainerProps> = ({childr
   return (
     <div
       style={{
-        width: '100%'
+        width: "100%", display: "flex" 
       }}
     >{children}</div>
   )

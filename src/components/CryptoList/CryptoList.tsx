@@ -3,35 +3,44 @@ import { Checkbox, FormControlLabel, Typography } from "@mui/material";
 import "./CryptoListStyles.css";
 import { CryptoData } from "../../utils/api";
 import { ACTIONS } from "../../App";
+import StarIcon from "@mui/icons-material/Star";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
 
 interface CryptoListProps {
   cryptocurrencies: CryptoData[];
   manageSelectedCurrenciesDispatch: Function;
+  selectedCurrencies: string[];
 }
 
 const CryptoList: React.FC<CryptoListProps> = ({
   cryptocurrencies,
   manageSelectedCurrenciesDispatch,
+  selectedCurrencies
 }) => {
+  const [renderCryptoCurrencies, setRenderCryptoCurrencies] = useState<
+    CryptoData[]
+  >([]);
 
-  const [renderCryptoCurrencies, setRenderCryptoCurrencies] = useState<CryptoData[]>([]);
+  useEffect(() => {
+    const localStorageItem = localStorage.getItem("selectedCurrencies");
+    if (localStorageItem) {
+      const tempIds: string[] =
+        JSON.parse(localStorageItem).selectedCurrenciesIds;
+      let tempCurrencies = cryptocurrencies.map((crypto: CryptoData) => ({
+        ...crypto,
+        selected: tempIds.includes(crypto.id),
+      }));
+      tempCurrencies.sort((a, b) => {
+        // Move selected cryptos to the top
+        if (a.selected && !b.selected) return -1;
+        if (!a.selected && b.selected) return 1;
+        return 0;
+      });
 
-  useEffect(()=>{const localStorageItem = localStorage.getItem('selectedCurrencies');
-  if (localStorageItem) {
-    const tempIds: string[] = JSON.parse(localStorageItem).selectedCurrenciesIds;
-    let tempCurrencies = cryptocurrencies.map((crypto:CryptoData)=>({...crypto, selected: tempIds.includes(crypto.id) }));
-    setRenderCryptoCurrencies([...tempCurrencies]);
-  }
-  },[cryptocurrencies])
+      setRenderCryptoCurrencies([...tempCurrencies]);
+    }
+  }, [cryptocurrencies, selectedCurrencies]);
 
-  // useEffect(() => {
-  //   const items = localStorage.getItem('selectedCurrencies');
-  //   if (items) {
-  //     const selectedCurrenciesIds = JSON.parse(items).selectedCurrenciesIds;
-  //     setLocalStorageCurrencies(selectedCurrenciesIds);
-  //   }
-  //   console.log(localStorageCurrencies, "!!!!!!!!!!!!!!!!");
-  // }, []);
   return (
     <div className="crypto-list">
       <div className="crypto-header">
@@ -46,20 +55,25 @@ const CryptoList: React.FC<CryptoListProps> = ({
           <div key={crypto.id} className="crypto-item">
             <FormControlLabel
               control={
+                <label className="star-checkbox-root">
                 <Checkbox
-                checked={crypto.selected}
-                  onChange={(e) => {
-                    const isChecked = e.target.checked;
-                    crypto.selected = isChecked;
-                    const actionType = isChecked
-                      ? ACTIONS.SET_SELECTED_CURRENCIES
-                      : ACTIONS.REMOVE_SELECTED_CURRENCIES;
-                    manageSelectedCurrenciesDispatch({
-                      type: actionType,
-                      payload: crypto.id,
-                    });
-                  }}
-                />
+                    className="star-checkbox-input"
+                    icon={<StarBorderIcon />}
+                    checkedIcon={<StarIcon className="star-checkbox-icon" />}
+                      checked={crypto.selected}
+                      onChange={(e) => {
+                        const isChecked = e.target.checked;
+                        crypto.selected = isChecked;
+                        const actionType = isChecked
+                          ? ACTIONS.SET_SELECTED_CURRENCIES
+                          : ACTIONS.REMOVE_SELECTED_CURRENCIES;
+                        manageSelectedCurrenciesDispatch({
+                          type: actionType,
+                          payload: crypto.id,
+                        });
+                      }}
+                    />
+                </label>
               }
               label={crypto.name} // Provide the label text here
             />

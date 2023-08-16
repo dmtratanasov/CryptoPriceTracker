@@ -1,0 +1,15 @@
+.selected-crypto-item {
+    background-color: rgba(245, 245, 245, 0.7);
+    margin: 10px;
+    border-radius: 8px;
+}
+
+.selected-crypto-item-change {
+    color: green;
+    padding: 0 8px; 
+  }
+  .selected-crypto-item-change.negative {
+    color: red;
+  }
+.selected-crypto-item-name{}
+.selected-crypto-item-price{}

@@ -75,7 +75,6 @@ function App() {
     if (localStorageItem) {
       const tempIds: string[] = JSON.parse(localStorageItem).selectedCurrenciesIds;
       setLocalStorageCurrencies(tempIds);
-      console.log(tempIds, "TEMPPPP");
       tempIds.forEach((id: string) => {
         dispatch({ type: ACTIONS.SET_SELECTED_CURRENCIES, payload: id });
       });
@@ -107,6 +106,7 @@ function App() {
         <CryptoList
           cryptocurrencies={cryptocurrencies}
           manageSelectedCurrenciesDispatch={dispatch}
+          selectedCurrencies={selectedCurrenciesData.selectedCurrenciesIds}
         />
       </div>
     </div>
