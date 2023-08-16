@@ -5,6 +5,7 @@
   display: flex;
   justify-content: space-between;
   padding: 20px;
+  gap:5px
 }
 
 .see-all-wrapper {

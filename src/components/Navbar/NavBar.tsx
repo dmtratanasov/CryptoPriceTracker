@@ -15,11 +15,6 @@ const Navbar: React.FC<NavbarProps> = ({ onSearch }) => {
 
   return (
     <>
-      <Typography variant="h4" component="div" className="title">
-        <Link to="/" style={{ textDecoration: "none", color: "white" }}>
-          Crypto Lookup
-        </Link>
-      </Typography>
       <div className="search">
         <div className="search-icon">
           <SearchIcon />

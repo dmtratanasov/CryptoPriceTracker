@@ -1,0 +1,73 @@
+.selected-crypto-item {
+    background-color: rgba(245, 245, 245, 0.7);
+    margin: 10px;
+    border-radius: 8px;
+    justify-content: space-between;
+    padding: 20px;
+  }
+  
+  .see-all-wrapper {
+    display: flex;
+    justify-content: end;
+    padding: 0 10px 3px 0;
+  }
+  
+  .see-all-wrapper-link {
+    color: white;
+    margin: 0px;
+    text-decoration: underline;
+  }
+  .star-icon {
+    color: rgba(242, 225, 13, 1);
+  }
+  
+  .selected-crypto-item-change {
+    color: green;
+    padding: 0 8px;
+  }
+  .selected-crypto-item-change.negative {
+    color: red;
+  }
+
+  .all-selected-crypto-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 13px;
+    padding: 0 16px;
+    max-height: 70vh;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: lightgrey transparent;
+  }
+  
+  .all-selected-crypto-list::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .all-selected-crypto-list::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .all-selected-crypto-list::-webkit-scrollbar-thumb {
+    background-color: lightgrey;
+    border-radius: 10px;
+  }
+  
+  .all-selected-crypto-list::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(37, 16, 16);
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .selected-crypto-item {
+      flex-direction: column;
+      align-items: center;
+      padding: 10px;
+    }
+  
+    .selected-crypto-item-change {
+      padding: 5px 8px;
+    }
+  }
+  

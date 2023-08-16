@@ -3,6 +3,8 @@ import useSelectedCryptoData from "../../hooks/useSelectedCryptoData";
 import SelectedCryptoContainer from "./SelectedCryptoContainer";
 import SelectedCryptoItem from "./SelectedCryptoItem";
 import { Link } from "react-router-dom";
+import "./SelectedCryptoItem.css";
+
 
 interface SelectedCryptoListProps {
   selectedCurrenciesIds: string[];
@@ -29,9 +31,11 @@ const SelectedCryptoList: React.FC<SelectedCryptoListProps> = ({
           <SelectedCryptoItem key={crypto.id} crypto={crypto} />
         ))}
       </div>
+      { selectedCryptocurrencies.length > 0 &&
       <div className="see-all-wrapper">
-          <Link to="/" className="see-all-wrapper-link">See all</Link>
+          <Link to="/selected" className="see-all-wrapper-link">See all</Link>
       </div>
+      }
     </SelectedCryptoContainer>
   );
 };

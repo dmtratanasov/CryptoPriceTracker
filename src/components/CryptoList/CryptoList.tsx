@@ -27,8 +27,8 @@ const CryptoList: React.FC<CryptoListProps> = ({
     let updatedCurrencies: CryptoData[] = cryptocurrencies;
 
     if (localStorageItem) {
-      const selectedIds: string[] = JSON.parse(localStorageItem)
-        .selectedCurrenciesIds;
+      const selectedIds: string[] =
+        JSON.parse(localStorageItem).selectedCurrenciesIds;
 
       updatedCurrencies = cryptocurrencies.map((crypto: CryptoData) => ({
         ...crypto,

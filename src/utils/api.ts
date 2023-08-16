@@ -43,7 +43,7 @@ export interface CryptoData {
       try {
         const response = await axios.get(`${COINCAP_API_BASE_URL}/assets`, {
           params: {
-            limit: 20,
+            limit: ids.length,
             ids: ids?.join(',')
           },
         });
