@@ -25,7 +25,7 @@ const SelectedCryptoList: React.FC<SelectedCryptoListProps> = ({
 
   console.log(selectedCryptocurrencies, "multiple logs");
   return (
-    <div style={{ backgroundColor: "green", width:"100%"}}>
+    <div style={{ backgroundColor: "green", width:"100%", display:'flex'}}>
       {selectedCryptocurrencies ? (
         selectedCryptocurrencies.map((crypto) => (
             // <SelectedCryptoContainer>
