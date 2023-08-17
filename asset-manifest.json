@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/repo-name/static/css/main.bdef4ca0.css",
-    "main.js": "/repo-name/static/js/main.20c69f18.js",
-    "static/js/787.9ae4ce73.chunk.js": "/repo-name/static/js/787.9ae4ce73.chunk.js",
-    "static/media/crypto_background.jpg": "/repo-name/static/media/crypto_background.1e1643889a445e39627f.jpg",
-    "index.html": "/repo-name/index.html",
-    "main.bdef4ca0.css.map": "/repo-name/static/css/main.bdef4ca0.css.map",
-    "main.20c69f18.js.map": "/repo-name/static/js/main.20c69f18.js.map",
-    "787.9ae4ce73.chunk.js.map": "/repo-name/static/js/787.9ae4ce73.chunk.js.map"
+    "main.css": "/CryptoPriceTracker/static/css/main.f8ed9a12.css",
+    "main.js": "/CryptoPriceTracker/static/js/main.5c50c0c7.js",
+    "static/js/787.9ae4ce73.chunk.js": "/CryptoPriceTracker/static/js/787.9ae4ce73.chunk.js",
+    "static/media/crypto_background.jpg": "/CryptoPriceTracker/static/media/crypto_background.1e1643889a445e39627f.jpg",
+    "index.html": "/CryptoPriceTracker/index.html",
+    "main.f8ed9a12.css.map": "/CryptoPriceTracker/static/css/main.f8ed9a12.css.map",
+    "main.5c50c0c7.js.map": "/CryptoPriceTracker/static/js/main.5c50c0c7.js.map",
+    "787.9ae4ce73.chunk.js.map": "/CryptoPriceTracker/static/js/787.9ae4ce73.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.bdef4ca0.css",
-    "static/js/main.20c69f18.js"
+    "static/css/main.f8ed9a12.css",
+    "static/js/main.5c50c0c7.js"
   ]
 }
