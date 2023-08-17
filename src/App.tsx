@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useReducer } from "react";
 import Navbar from "./components/Navbar/NavBar";
 import CryptoList from "./components/CryptoList/CryptoList";
-import useCryptoData from "./hooks/useCryptoData"; // Custom hook
-import "./App.css"; // If you have additional global styles
+import useCryptoData from "./hooks/useCryptoData";
+import "./App.css";
 import SelectedCryptoList from "./components/SelectedCryptoList/SelectedCryptoList";
-import CryptoBackground from "./assets/images/crypto_background.jpg";
 import { CryptoData } from "./utils/api";
 import {
   BrowserRouter as Router,
@@ -14,7 +13,10 @@ import {
   Link,
 } from "react-router-dom";
 import AllSelectedCrypto from "./components/AllSelectedCryptoList/AllSelectedCrypto";
-import { Typography } from "@mui/material";
+import { Alert, Snackbar, Typography } from "@mui/material";
+
+
+const appTitle = "Crypto Lookup";
 
 export const ACTIONS = {
   SET_SELECTED_CURRENCIES: "SET_SELECTED_CURRENCIES",
@@ -23,7 +25,7 @@ export const ACTIONS = {
 
 function App() {
   const selectedCurrenciesReducer = (state: any, action: any) => {
-    const { type, payload } = action;
+    const { type, payload, favButtonClick } = action;
 
     const addToLocalStorage = (selectedCurrencies: CryptoData[]) => {
       const stringifiedSelectedCurrencies = JSON.stringify(selectedCurrencies);
@@ -40,6 +42,10 @@ function App() {
           ...state,
           selectedCurrenciesIds: [...state.selectedCurrenciesIds, payload],
         });
+        if(favButtonClick){
+          setAlertText('Currency added to favorites');
+          setAlertOpen(true);
+        }
         return {
           ...state,
           selectedCurrenciesIds: [...state.selectedCurrenciesIds, payload],
@@ -55,6 +61,10 @@ function App() {
           ...state,
           selectedCurrenciesIds: [...state.selectedCurrenciesIds, payload],
         });
+        if(favButtonClick){
+          setAlertText('Currency removed from favorites');
+          setAlertOpen(true);
+        }
         return {
           ...state,
           selectedCurrenciesIds: state.selectedCurrenciesIds.filter(
@@ -66,6 +76,8 @@ function App() {
     }
   };
 
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertText, setAlertText] = useState('');
   const [localStorageCurrencies, setLocalStorageCurrencies] = useState<
     string[]
   >([]);
@@ -104,11 +116,10 @@ function App() {
       <Router>
         <div
           className="crypto-list-wrapper"
-          style={{ backgroundImage: `url(${CryptoBackground})` }}
         >
           <Typography variant="h4" component="div" className="title">
             <Link to="/" style={{ textDecoration: "none", color: "white" }}>
-              Crypto Lookup
+              {appTitle}
             </Link>
           </Typography>
           <Routes>
@@ -116,6 +127,19 @@ function App() {
               path="/"
               element={
                 <>
+                  <Snackbar
+                    open={alertOpen}
+                    autoHideDuration={1000}
+                    onClose={() => setAlertOpen(false)}
+                    anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+                  >
+                    <Alert
+                      severity="success"
+                      onClose={() => setAlertOpen(false)}
+                    >
+                      {alertText}
+                    </Alert>
+                  </Snackbar>
                   <Navbar onSearch={handleSearch} />
                   <SelectedCryptoList
                     selectedCurrenciesIds={
@@ -145,7 +169,6 @@ function App() {
               }
             />
             <Route path="*" element={<Navigate to="/" />} />{" "}
-            {/* Fallback route */}
           </Routes>
         </div>
       </Router>

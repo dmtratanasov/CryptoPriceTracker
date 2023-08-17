@@ -12,7 +12,6 @@ const SelectedCryptoItem: React.FC<SelectedCryptoItemProps> = ({ crypto }) => {
     <div
       className="selected-crypto-item"
       key={crypto.id}
-      style={{ width: "20%" }}
     >
       <Typography className="selected-crypto-item-name">
         {crypto.name}

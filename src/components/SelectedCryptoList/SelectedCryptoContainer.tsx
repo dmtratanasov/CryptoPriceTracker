@@ -7,9 +7,7 @@ interface SelectedCryptoContainerProps {
 const SelectedCryptoContainer: React.FC<SelectedCryptoContainerProps> = ({children}) => {
   return (
     <div
-      style={{
-        width: "100%", display: "flex", flexDirection:'column'
-      }}
+      className='selected-crypto-container'
     >{children}</div>
   )
 }

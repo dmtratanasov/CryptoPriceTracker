@@ -77,6 +77,7 @@ const CryptoList: React.FC<CryptoListProps> = ({
                       manageSelectedCurrenciesDispatch({
                         type: actionType,
                         payload: crypto.id,
+                        favButtonClick: true
                       });
                     }}
                   />

@@ -26,7 +26,7 @@ const SelectedCryptoList: React.FC<SelectedCryptoListProps> = ({
 
   return (
     <SelectedCryptoContainer>
-      <div style={{display:"flex"}}>
+      <div className="display-flex">
         {selectedCryptocurrencies?.slice(0, 4).map((crypto) => (
           <SelectedCryptoItem key={crypto.id} crypto={crypto} />
         ))}

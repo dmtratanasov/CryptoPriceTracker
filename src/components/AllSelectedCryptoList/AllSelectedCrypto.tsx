@@ -24,8 +24,8 @@ const AllSelectedCrypto: React.FC<AllSelectedCryptoProps> = ({
     }
   }, [fetchSelectedData, selectedCurrenciesIds]);
   return (
-    <div style={{ padding: "30px" }}>
-      <Typography style={{ color: "white" }} variant="h4" align="center">
+    <div className="all-selected-crypto-wrapper">
+      <Typography className="typography" variant="h4" align="center">
         Favorites 
         <StarIcon className="star-icon" fontSize="medium" />
       </Typography>
@@ -33,7 +33,7 @@ const AllSelectedCrypto: React.FC<AllSelectedCryptoProps> = ({
         {selectedCryptocurrencies.length ? (
           selectedCryptocurrencies.map((crypto: CryptoData) => (
             <Grid key={crypto.id} item xs={12} sm={4} md={3}>
-              <Paper elevation={3} style={{ padding: "20px", backgroundColor: 'rgba(245, 245, 245, 0.7)' }}>
+              <Paper elevation={3} className="paper">
                 <Typography className="selected-crypto-item-name">
                   {crypto.name}
                 </Typography>
@@ -52,7 +52,7 @@ const AllSelectedCrypto: React.FC<AllSelectedCryptoProps> = ({
             </Grid>
           ))
         ) : (
-          <div style={{ color: "white", marginTop:'20px' }}>No currencies added</div>
+          <div className="no-currencies">No currencies added</div>
         )}
       </Grid>
     </div>
