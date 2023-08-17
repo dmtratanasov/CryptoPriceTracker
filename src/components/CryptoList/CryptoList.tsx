@@ -95,7 +95,7 @@ const CryptoList: React.FC<CryptoListProps> = ({
                 }`}
               >
                 {crypto.changePercent24Hr >= 0 ? "+" : ""}
-                {crypto.changePercent24Hr.toFixed(2)}%
+                { isNaN(crypto.changePercent24Hr) ? '%' : crypto.changePercent24Hr.toFixed(2) + ' %'}
               </Typography>
             </div>
           </div>
